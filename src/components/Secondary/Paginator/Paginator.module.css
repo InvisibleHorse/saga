@@ -1,16 +1,16 @@
 .paginator{
-    padding-left: 45%;
+    margin: 0 auto;
+    display: inline-flex;
 }
 
 .listElement{
     background-color: #e1b7aa !important;
     border-color: #be998e !important;
     --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+    --bs-pagination-hover-color: #a9a9a9;
+    --bs-pagination-focus-color: #e0e0e0;
+    --bs-pagination-active-color: #516763;
+    --bs-pagination-color: white;
+    font-weight: bold;
 }
 
-/*media*/
-@media (max-width:480px){
-    .paginator{
-        padding-left: 33%;
-    }
-}
