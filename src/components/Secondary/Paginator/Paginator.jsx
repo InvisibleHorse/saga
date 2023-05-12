@@ -5,20 +5,19 @@ import s from './Paginator.module.css';
 
 function Pagination({ newsPerPage, totalPosts, paginate }) {
     const pageNumbers = [];
-
     // eslint-disable-next-line no-plusplus
     for (let i = 1; i <= Math.ceil(totalPosts / newsPerPage); i++) {
         pageNumbers.push(i);
     }
 
     return (
-        <nav className={s.paginator}>
-            <ul className="pagination">
+        <nav>
+            <ul className={`${s.paginator} pagination`}>
                 {pageNumbers.map(number => (
                     <li key={number} className="page - item">
                         <NavLink
                             onClick={() => paginate(number)}
-                            href="/popular-news"
+                            to={`/latest-news/${number}`}
                             className={`${s.listElement} page-link`}
                         >
                             {number}

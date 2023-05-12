@@ -7,28 +7,25 @@ import Preloader from '../components/partials/Preloader';
 
 export default function LatestNews() {
     const latestNews = useSelector(store => store?.news?.latestNews || []);
+    const pages = useSelector(store => store?.news.pages || 0);
     const { latestNewsError } = useSelector(store => store?.errors || {});
     const { isDataLoading } = useSelector(store => store?.loader || {});
     const dispatch = useDispatch();
-    const [currentPage, setCurrentPage] = useState(1);
-    const [newsPerPage] = useState(5);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [newsPerPage] = useState(10);
 
     useEffect(() => {
-        dispatch(loadMoreLatest());
-    }, [dispatch, newsPerPage]);
+        dispatch(loadMoreLatest({ limit: newsPerPage, page: currentPage }));
+    }, [dispatch, newsPerPage, currentPage]);
     const paginate = pageNumber => setCurrentPage(pageNumber);
-
-    const indexOfLastPost = currentPage * newsPerPage;
-    const indexOfFirstPost = indexOfLastPost - newsPerPage;
-    const currentNews = latestNews.slice(indexOfFirstPost, indexOfLastPost);
 
     return (
         <div className={s.main}>
             {isDataLoading ?
                 <Preloader /> : (
                     <NewsList
-                        news={currentNews} newsPerPage={newsPerPage}
-                        totalPosts={latestNews.length}
+                        news={latestNews} newsPerPage={newsPerPage}
+                        totalPosts={pages}
                         paginate={paginate} error={latestNewsError} title="Latest News"
                     />
                 )}

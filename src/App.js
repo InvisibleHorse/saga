@@ -12,8 +12,8 @@ function App() {
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/latest-news" element={<LatestNews />} />
-                <Route path="/popular-news" element={<PopularNews />} />
+                <Route path="/latest-news/:number" element={<LatestNews />} />
+                <Route path="/popular-news/:number" element={<PopularNews />} />
             </Routes>
             <Footer />
         </div>

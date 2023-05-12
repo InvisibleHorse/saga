@@ -6,20 +6,20 @@ export const SET_LATEST_NEWS_ERROR = 'SET_LATEST_NEWS_ERROR';
 export const SET_POPULAR_NEWS_ERROR = 'SET_POPULAR_NEWS_ERROR';
 export const SET_LOADING_DATA = 'SET_LOADING_DATA';
 
-export const setLatestNews = receivedNews => ({
+export const setLatestNews = payload => ({
     type: SET_LATEST_NEWS,
-    receivedNews,
+    payload,
 });
 
-export const setPopularNews = receivedNews => ({
+export const setPopularNews = payload => ({
     type: SET_POPULAR_NEWS,
-    receivedNews,
+    payload,
 });
-export const loadMorePopular = receivedNews => ({
+export const loadMorePopular = payload => ({
     type: GET_POPULAR_NEWS,
-    receivedNews,
+    payload,
 });
-export const loadMoreLatest = receivedNews => ({
+export const loadMoreLatest = payload => ({
     type: GET_LATEST_NEWS,
-    receivedNews,
+    payload,
 });

@@ -7,13 +7,16 @@ import {
     SET_POPULAR_NEWS_ERROR,
     SET_LATEST_NEWS_ERROR, SET_LOADING_DATA,
 } from '../actions/news';
-import { getLatestNews, getPopularNews } from '../../api/api';
+import { news } from '../../api/api';
 
 export function* handleLatestNews(action) {
     try {
         yield put({ type: SET_LOADING_DATA, payload: true });
-        const { hits } = yield call(getLatestNews, action.receivedNews);
-        yield put(setLatestNews(hits));
+        const { hits, nbPages } = yield call(
+            news.getLatestNews,
+            { limit: action.payload.limit, page: action.payload.page },
+        );
+        yield put(setLatestNews({ receivedNews: hits, pages: nbPages }));
     } catch {
         yield put({ type: SET_LATEST_NEWS_ERROR, payload: 'Error fetching latest news' });
     } finally {
@@ -23,8 +26,11 @@ export function* handleLatestNews(action) {
 export function* handlePopularNews(action) {
     try {
         yield put({ type: SET_LOADING_DATA, payload: true });
-        const { hits } = yield call(getPopularNews, action.receivedNews);
-        yield put(setPopularNews(hits));
+        const { hits, nbPages } = yield call(
+            news.getPopularNews,
+            { limit: action.payload.limit, page: action.payload.page },
+        );
+        yield put(setPopularNews({ receivedNews: hits, pages: nbPages }));
     } catch {
         yield put({ type: SET_POPULAR_NEWS_ERROR, payload: 'Error fetching popular news' });
     } finally {
